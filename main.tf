@@ -1,5 +1,15 @@
+## VPC, Security group test
+resource "aws_vpc" "vpc-test-stn" {
+  cidr_block  = "10.0.0.0/16"
+
+  tags = {
+    Name = "vpc-test-stn"
+  }
+}
+
 resource "aws_security_group" "poc-workspace_sg" {
   name        = "poc-workspace_sg"
+  vpc_id = aws_vpc.vpc-test-stn.id
   description = "Security Group poc-workspace-sg"
 
   ingress {
